@@ -31,5 +31,30 @@ install_packages(){
 	done
 }
 
+# function -> install brave-browser
 
+install_browser(){
+
+	# Verify if curl package is already installed
+	if ! is_package_installed "curl"; then
+		sudo apt install curl -y
+	fi	
+
+	sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+
+	echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+
+	sudo apt update # Update the system
+
+	# Verify and try to install brave-browser
+	if ! is_package_installed "brave-browser"; then
+		if sudo apt install brave-browser -y; then
+			echo "[+] Brave installed successfully"
+		else
+			echo "[!] Error installing Brave"
+		fi
+	else
+		echo "[!] Brave is already installed"
+	fi
+}
 
