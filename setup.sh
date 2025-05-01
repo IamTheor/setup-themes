@@ -32,7 +32,6 @@ install_packages(){
 }
 
 # function -> install brave-browser
-
 install_browser(){
 
 	# Verify if curl package is already installed
@@ -57,4 +56,15 @@ install_browser(){
 		echo "[!] Brave is already installed"
 	fi
 }
+
+# function -> check if a directory exists
+is_directory_created(){
+	directory=$1
+	
+	# If the directory does not exists, make the directory
+	if ! [-d "$directory"]; then
+		mkdir "$directory"
+	fi	
+}
+
 
