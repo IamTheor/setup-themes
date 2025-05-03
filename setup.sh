@@ -66,3 +66,28 @@ is_directory_created(){
 		mkdir -p "$directory"
 	fi	
 }
+
+# function -> create a link between .config directory and repo directory
+set_themes_files(){
+	theme_name=$1
+	src_dir="$(pwd)/themes/$theme_name"
+	config_dir="$HOME/.config"
+
+	echo "[+] Creating symlinks from theme '$theme_name' into ~/.config"
+
+	# Create necessary directories if they don't exist
+	is_directory_created "$config_dir/bspwm"
+	is_directory_created "$config_dir/sxhkd"
+	is_directory_created "$config_dir/kitty"
+
+	# Create symlinks (overwrite if already exist with -sf)
+	ln -sf "$src_dir/bspwmrc" "$config_dir/bspwm/bspwmrc"
+	ln -sf "$src_dir/sxhkdrc" "$config_dir/sxhkd/sxhkdrc"
+	ln -sf "$src_dir/kitty.conf" "$config_dir/kitty/kitty.conf"
+
+	# Set wallpaper using feh
+	feh --bg-scale "$src_dir/naruto_wallpaper.png"
+
+	echo "[+] Symlinks for theme '$theme_name' applied successfully."	
+}
+
