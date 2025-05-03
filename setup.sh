@@ -62,9 +62,7 @@ is_directory_created(){
 	directory=$1
 	
 	# If the directory does not exists, make the directory
-	if ! [-d "$directory"]; then
-		mkdir "$directory"
+	if [! -d "$directory"]; then
+		mkdir -p "$directory"
 	fi	
 }
-
-
