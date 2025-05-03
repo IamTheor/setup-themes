@@ -36,6 +36,7 @@ install_browser(){
 
 	# Verify if curl package is already installed
 	if ! is_package_installed "curl"; then
+		echo "[*] Installing curl (required for Brave Browser)"
 		sudo apt install curl -y
 	fi	
 
@@ -62,7 +63,7 @@ is_directory_created(){
 	directory=$1
 	
 	# If the directory does not exists, make the directory
-	if [! -d "$directory"]; then
+	if [ ! -d "$directory"]; then
 		mkdir -p "$directory"
 	fi	
 }
