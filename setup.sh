@@ -92,65 +92,66 @@ set_themes_files(){
 	echo "[+] Symlinks for theme '$theme_name' applied successfully."	
 }
 
-#!/bin/bash
-
-# === Menú principal ===
+# Main menu
 main(){
 	while true; do
 		clear
 		echo "==============================="
-		echo "  Entorno gráfico automático"
+		echo "         setup-themes          "
 		echo "==============================="
-		echo "1) Instalar requerimientos"
-		echo "2) Elegir tema"
-		echo "3) Salir"
+		echo "1) Install packages"
+		echo "2) Select theme"
+		echo "3) Exit"
 		echo "==============================="
-		read -p "Seleccione una opción [1-3]: " opcion
+		read -p "[1-3] >> " opcion
 	
 		case $opcion in
 		1)
-			echo "[+] Instalando requerimientos..."
+			echo "[+] Installing packages..."
 			install_packages "${windows_requirements[@]}"
 			install_packages "${terminal_requirements[@]}"
 			install_browser
-			read -p "Presione ENTER para continuar..."
+			read -p "Press ENTER to continue..."
 			;;
 		2)
 			# Submenú de temas
 			while true; do
 				clear
 				echo "==============================="
-				echo "      Elegir un tema           "
+				echo "        Choose a Theme         "
 				echo "==============================="
 				echo "1) naruto-theme"
-				echo "2) Volver"
+				echo "2) return"
 				echo "==============================="
-				read -p "Seleccione una opción [1-2]: " tema_opcion
+				read -p "[1-2] >> " tema_opcion
 
 				case $tema_opcion in
 					1)
-						echo "[+] Aplicando tema 'naruto-theme'..."
+						echo "[+] naruto-theme..."
 						set_themes_files naruto-theme
-						read -p "Presione ENTER para continuar..."
+						read -p "Press ENTER to continue..."
 						;;
 					2)
 						break
 						;;
 					*)
-						echo "[!] Opción inválida."
-						read -p "Presione ENTER para continuar..."
+						echo "[!] Choose a correct option..."
+						read -p "Press ENTER to continue..."
 						;;
 				esac
 			done
 			;;
 	       	3)
-	            echo "[+] Saliendo..."
-        	    exit 0
-	            ;;
+			clear
+			echo "[+] Good bye..."
+			exit 0
+			;;
 		*)
-			echo "[!] Opción inválida..."
-			read -p "Presione ENTER para continuar..."
+			echo "[!] Choose a correct option..."
+			read -p "Press ENTER to continue..."
 			;;
 		esac
 	done
 }
+
+main
